@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DogAdoptApp</string>
+    <string name="app_logo">App logo</string>
+    <string name="search_icon">Search Icon</string>
+    <string name="location_image">Location Image</string>
+    <string name="network_error_icon">Network Error Icon</string>
+    <string name="on_boarding_image">On Boarding Image</string>
+    <string name="dog_image">Dog Image</string>
+    <string name="close_icon">Close Icon</string>
+</resources>
