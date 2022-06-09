@@ -5,6 +5,7 @@ import android.graphics.Color.parseColor
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -25,11 +26,11 @@ import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.example.dogadoptapp.R
 import com.example.dogadoptapp.domain.model.Dog
+import com.example.dogadoptapp.navigation.Screen
 import com.example.dogadoptapp.ui.theme.*
 import com.example.dogadoptapp.util.Constants.BASE_URL
 import com.example.dogadoptapp.util.Constants.MAX_LINES
 import com.example.dogadoptapp.util.Constants.MIN_BACKGROUND_IMAGE_HEIGHT
-import com.google.accompanist.systemuicontroller.SystemUiController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @ExperimentalMaterialApi
@@ -42,7 +43,7 @@ fun DetailContent(
     var vibrant by remember { mutableStateOf("#000000") }
     var darkVibrant by remember { mutableStateOf("#000000") }
     var onDarkVibrant by remember { mutableStateOf("#ffffff") }
-    
+
     LaunchedEffect(key1 = selectedDog) {
         vibrant = colors["vibrant"]!!
         darkVibrant = colors["darkVibrant"]!!
@@ -82,8 +83,10 @@ fun DetailContent(
                     selectedDog = it,
                     infoboxIconColor = Color(parseColor(vibrant)),
                     sheetBackgroundColor = Color(parseColor(darkVibrant)),
-                    contentColor = Color(parseColor(onDarkVibrant))
-                ) }
+                    contentColor = Color(parseColor(onDarkVibrant)),
+                    navController = navController
+                )
+            }
         },
         content = {
             selectedDog?.let { dog ->
@@ -102,6 +105,7 @@ fun DetailContent(
 
 @Composable
 fun BottomSheetContent(
+    navController: NavHostController,
     selectedDog: Dog,
     infoboxIconColor: Color = MaterialTheme.colors.primary,
     sheetBackgroundColor: Color = MaterialTheme.colors.surface,
@@ -135,6 +139,21 @@ fun BottomSheetContent(
                 fontSize = MaterialTheme.typography.h4.fontSize,
                 fontWeight = FontWeight.Bold
             )
+            Box(
+                modifier = Modifier
+                    .background(
+                        color = infoboxIconColor,
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                    .clickable { navController.navigate(Screen.Overview.route) }
+            ) {
+                Text(
+                    modifier = Modifier.padding(SMALL_PADDING),
+                    text = "Adopt me",
+                    fontSize = MaterialTheme.typography.h6.fontSize,
+                    color = MaterialTheme.colors.titleColor
+                )
+            }
         }
         Row(
             modifier = Modifier
@@ -378,22 +397,22 @@ fun BackgroundContent(
 
 @ExperimentalMaterialApi
 val BottomSheetScaffoldState.currentSheetFraction: Float
-get() {
-    val fraction = bottomSheetState.progress.fraction
-    val targetValue = bottomSheetState.targetValue
-    val currentValue = bottomSheetState.currentValue
+    get() {
+        val fraction = bottomSheetState.progress.fraction
+        val targetValue = bottomSheetState.targetValue
+        val currentValue = bottomSheetState.currentValue
 
-    return when {
-        currentValue == BottomSheetValue.Collapsed && targetValue == BottomSheetValue.Collapsed -> 1f
-        currentValue == BottomSheetValue.Expanded && targetValue == BottomSheetValue.Expanded -> 0f
-        currentValue == BottomSheetValue.Collapsed && targetValue == BottomSheetValue.Expanded -> 1f - fraction
-        currentValue == BottomSheetValue.Expanded && targetValue == BottomSheetValue.Collapsed -> 0f + fraction
-        else -> fraction
+        return when {
+            currentValue == BottomSheetValue.Collapsed && targetValue == BottomSheetValue.Collapsed -> 1f
+            currentValue == BottomSheetValue.Expanded && targetValue == BottomSheetValue.Expanded -> 0f
+            currentValue == BottomSheetValue.Collapsed && targetValue == BottomSheetValue.Expanded -> 1f - fraction
+            currentValue == BottomSheetValue.Expanded && targetValue == BottomSheetValue.Collapsed -> 0f + fraction
+            else -> fraction
+        }
     }
-}
 
 @Composable
-@Preview(showBackground = true)
+@Preview()
 fun BottomSheetContentPrev() {
-//    BottomSheetContent(selectedDog = d)
+
 }

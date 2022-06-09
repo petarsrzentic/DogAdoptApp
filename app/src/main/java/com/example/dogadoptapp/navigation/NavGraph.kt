@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import coil.annotation.ExperimentalCoilApi
+import com.example.dogadoptapp.presentation.screens.OverviewScreen
 import com.example.dogadoptapp.presentation.screens.details.DetailScreen
 import com.example.dogadoptapp.presentation.screens.home.HomeScreen
 import com.example.dogadoptapp.presentation.screens.search.SearchScreen
@@ -50,6 +51,10 @@ fun SetupNavGraph(navController: NavHostController) {
 
         composable(route = Screen.Search.route) {
             SearchScreen(navController)
+        }
+
+        composable(route = Screen.Overview.route) {
+            OverviewScreen(navController = navController)
         }
     }
 }
