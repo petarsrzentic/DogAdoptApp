@@ -102,11 +102,6 @@ fun DogItem(
     dog: Dog,
     navController: NavHostController
 ) {
-    /* rememberImagePainter - deprecated */
-//    val painter = rememberImagePainter(data = "$BASE_URL${dog.image}") {
-//        placeholder(drawable.ic_background_picture)
-//        error(drawable.ic_background_picture)
-//    }
 
     Box(
         modifier = Modifier
@@ -117,7 +112,7 @@ fun DogItem(
         contentAlignment = Alignment.BottomStart
     ) {
 
-        Surface(shape = RoundedCornerShape(size = LARGE_PADDING)) {
+        Surface(shape = RoundedCornerShape(topEnd = EXTRA_LARGE_PADDING, bottomStart = EXTRA_LARGE_PADDING)) {
             val painter = AsyncImage(
                 modifier = Modifier.fillMaxSize(),
                 model = "$BASE_URL${dog.image}",
@@ -138,8 +133,7 @@ fun DogItem(
                 .fillMaxWidth(),
             color = Color.Black.copy(alpha = 0.3f),
             shape = RoundedCornerShape(
-                bottomStart = LARGE_PADDING,
-                bottomEnd = LARGE_PADDING
+                bottomStart = EXTRA_LARGE_PADDING,
             )
         )
         {

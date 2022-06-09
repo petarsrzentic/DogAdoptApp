@@ -52,7 +52,7 @@ fun ShimmerItem(alpha: Float) {
            .fillMaxWidth()
            .height(DOG_ITEM_HEIGHT),
        color = if (isSystemInDarkTheme()) Color.Black else ShimmerLightGray,
-       shape = RoundedCornerShape(LARGE_PADDING)
+       shape = RoundedCornerShape(topEnd = EXTRA_LARGE_PADDING, bottomStart = EXTRA_LARGE_PADDING)
    ) {
         Column(
             modifier = Modifier
