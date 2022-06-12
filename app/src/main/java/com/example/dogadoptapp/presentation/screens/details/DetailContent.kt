@@ -83,8 +83,7 @@ fun DetailContent(
                     selectedDog = it,
                     infoboxIconColor = Color(parseColor(vibrant)),
                     sheetBackgroundColor = Color(parseColor(darkVibrant)),
-                    contentColor = Color(parseColor(onDarkVibrant)),
-                    navController = navController
+                    contentColor = Color(parseColor(onDarkVibrant))
                 )
             }
         },
@@ -105,7 +104,6 @@ fun DetailContent(
 
 @Composable
 fun BottomSheetContent(
-    navController: NavHostController,
     selectedDog: Dog,
     infoboxIconColor: Color = MaterialTheme.colors.primary,
     sheetBackgroundColor: Color = MaterialTheme.colors.surface,
@@ -145,7 +143,7 @@ fun BottomSheetContent(
                         color = infoboxIconColor,
                         shape = RoundedCornerShape(10.dp)
                     )
-                    .clickable { navController.navigate(Screen.Overview.route) }
+                    .clickable {  }
             ) {
                 Text(
                     modifier = Modifier.padding(SMALL_PADDING),
