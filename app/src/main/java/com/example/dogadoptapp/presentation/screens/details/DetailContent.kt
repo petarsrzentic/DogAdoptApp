@@ -2,6 +2,8 @@ package com.example.dogadoptapp.presentation.screens.details
 
 
 import android.graphics.Color.parseColor
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -10,12 +12,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -32,6 +36,7 @@ import com.example.dogadoptapp.util.Constants.BASE_URL
 import com.example.dogadoptapp.util.Constants.MAX_LINES
 import com.example.dogadoptapp.util.Constants.MIN_BACKGROUND_IMAGE_HEIGHT
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import kotlinx.coroutines.launch
 
 @ExperimentalMaterialApi
 @Composable
@@ -109,6 +114,7 @@ fun BottomSheetContent(
     sheetBackgroundColor: Color = MaterialTheme.colors.surface,
     contentColor: Color = MaterialTheme.colors.titleColor
 ) {
+
     Column(
         modifier = Modifier
             .background(sheetBackgroundColor)
@@ -137,18 +143,22 @@ fun BottomSheetContent(
                 fontSize = MaterialTheme.typography.h4.fontSize,
                 fontWeight = FontWeight.Bold
             )
+            val context = LocalContext.current
             Box(
                 modifier = Modifier
                     .background(
                         color = infoboxIconColor,
                         shape = RoundedCornerShape(10.dp)
                     )
-                    .clickable {  }
+                    .clickable {
+                        Toast.makeText(context, "All information is sent to the owner.", Toast.LENGTH_LONG).show()
+                    }
             ) {
                 Text(
                     modifier = Modifier.padding(SMALL_PADDING),
                     text = "Adopt me",
                     fontSize = MaterialTheme.typography.h6.fontSize,
+                    fontWeight = FontWeight.Medium,
                     color = MaterialTheme.colors.titleColor
                 )
             }
